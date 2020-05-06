@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "knexfile.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "celebrate": "^12.1.1",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "knex": "^0.21.1",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.3",
+    "pg": "^8.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
