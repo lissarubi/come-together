@@ -3,12 +3,7 @@ const axios = require('axios');
 const prompts = require('prompts');
 const colors = require('colors');
 
-async function go(apps) {
-  data = {
-    name: 'ederson',
-    apps: apps,
-  };
-
+async function go(apps, data) {
   try {
     const response = await axios.put('http://localhost:3333/users', data);
   } catch (err) {
@@ -83,21 +78,66 @@ async function useCome() {
 }
 
 async function useGo() {
-  query =
-    "zgrep -h ' install ' /var/log/dpkg.log* | sort | awk '{print $4}' | tr '\n' ' ' ";
-  exec(query, (error, stdout, stderr) => {
-    if (error) {
-      console.log(`error: ${error.message}`);
-      return;
-    }
-    if (stderr) {
-      console.log(`stderr: ${stderr}`);
-      return;
-    }
-    const apps = stdout;
+  const questions = [
+    {
+      type: 'text',
+      name: 'username',
+      message: 'Username: ',
+    },
+    {
+      type: 'text',
+      name: 'password',
+      message: 'Password: ',
+    },
+  ];
+  const response = await prompts(questions);
+  const username = response.username;
+  const password = response.password;
 
-    go(apps);
-  });
+  try {
+    const users = await come();
+    for (i = 1; i < users.length; i++) {
+      if (users[i].username == username && users[i].password == password) {
+        console.log('all your packages will be uploaded.');
+
+        const cont = await prompts({
+          type: 'text',
+          name: 'cont',
+          message: 'You want to continue? [Y/N]',
+        });
+        if (
+          cont.cont == 'y' ||
+          cont.cont == 'yes' ||
+          cont.cont == 'Y' ||
+          cont.cont == 'YES'
+        ) {
+          query =
+            "zgrep -h ' install ' /var/log/dpkg.log* | sort | awk '{print $4}' | tr '\n' ' ' ";
+          exec(query, (error, stdout, stderr) => {
+            if (error) {
+              console.log(`error: ${error.message}`);
+              return;
+            }
+            if (stderr) {
+              console.log(`stderr: ${stderr}`);
+              return;
+            }
+            const apps = stdout;
+            data = {
+              username: username,
+              password: password,
+              apps: apps,
+            };
+            go(apps, data);
+          });
+        } else {
+          console.log('cancelling the execution...'.red.bold);
+        }
+      }
+    }
+  } catch (err) {
+    console.log('Verify your username and password please.'.red.bold);
+  }
 }
 
 if (process.argv[2] == 'go') {
