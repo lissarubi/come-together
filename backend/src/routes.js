@@ -1,25 +1,33 @@
-const express = require('express')
-const {celebrate, Segments, Joi} = require('celebrate')
+const express = require('express');
+const { celebrate, Segments, Joi } = require('celebrate');
 
-const usersController = require('./controllers/usersController')
+const usersController = require('./controllers/usersController');
 
-const routes = express.Router()
+const routes = express.Router();
 
+routes.get('/users', usersController.index);
 
-routes.get('/users', usersController.index)
-
-routes.post('/users', celebrate({
+routes.post(
+  '/users',
+  celebrate({
     [Segments.BODY]: Joi.object().keys({
-        name: Joi.string().required(),
-        apps: Joi.string()
-    })
-}) ,usersController.create)
+      name: Joi.string().required(),
+      apps: Joi.string(),
+    }),
+  }),
+  usersController.create,
+);
 
-routes.put('/users', celebrate({
+routes.put(
+  '/users',
+  celebrate({
     [Segments.BODY]: Joi.object().keys({
-        name: Joi.string().required(),
-        apps: Joi.string()
-    })
-}) ,usersController.change)
+      username: Joi.string().required(),
+      password: Joi.string().required(),
+      apps: Joi.string(),
+    }),
+  }),
+  usersController.change,
+);
 
-module.exports = routes
+module.exports = routes;
