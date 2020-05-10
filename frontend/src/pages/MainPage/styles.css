@@ -1,0 +1,25 @@
+.gifImg {
+  width: 90%;
+  height: 90%;
+  border-radius: 10px;
+}
+.usage {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
+  width: 82.853%;
+  text-align: left;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  padding: 4vh;
+  color: whitesmoke;
+  background-color: black;
+}
+p {
+  font-size: 3ch;
+}
+code {
+  font-weight: bold;
+  color: green;
+}

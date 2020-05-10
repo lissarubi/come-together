@@ -8,13 +8,13 @@ module.exports = {
   },
 
   async create(request, response) {
-    const { name, apps } = request.body;
+    const { username, password, apps } = request.body;
 
     const id = crypto.randomBytes(8).toString('HEX');
 
     await connection('users').insert({
       id,
-      name,
+      username,
       password,
       apps,
     });

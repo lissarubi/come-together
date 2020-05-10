@@ -36,9 +36,10 @@ async function useCome() {
 
     try {
       const users = await come();
-      for (i = 1; i < users.length; i++) {
+      for (i = 0; i < users.length; i++) {
         if (users[i].username == username && users[i].password == password) {
           (async () => {
+
             query = `sudo apt-get install ${users[i].apps} -y`;
             console.log(
               'installing packages: ' + `${users[i].apps}`.green.bold,
@@ -68,7 +69,9 @@ async function useCome() {
             }
           })();
         } else {
-          console.log('Verify your username and password please.'.red.bold);
+          if (typeof query !== 'undefined'){
+            console.log('Verify your username and password please.'.red.bold);
+          }
         }
       }
     } catch (err) {
