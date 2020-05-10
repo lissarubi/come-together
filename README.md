@@ -5,9 +5,9 @@ Come Together is only a GitHub project which can send ALL your packeages to a da
 
 ## Usage
 
-``
+```
 node cli/index.js go // send your data
-``
+```
 ```
 node cli/index.js come // get your data
 ```
