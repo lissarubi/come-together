@@ -11,7 +11,8 @@ routes.post(
   '/users',
   celebrate({
     [Segments.BODY]: Joi.object().keys({
-      name: Joi.string().required(),
+      username: Joi.string().required(),
+      password: Joi.string().required(),
       apps: Joi.string(),
     }),
   }),
