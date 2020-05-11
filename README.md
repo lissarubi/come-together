@@ -13,3 +13,5 @@ node cli/index.js come // get your data
 ```
 
 this is only a GitHub project, you can fork and do anything with this code, but all the things you do with it will be your responsibility.
+
+The database is a Postgresql, with a table users, with columns "id, username, apps", all columns are text.
